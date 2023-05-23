@@ -1,0 +1,28 @@
+name: Linter
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Setup + Lint
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node_version: [16]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node_version }}
+
+      - name: Install Packages
+        run: yarn
+
+      - name: Linting
+        run: yarn lint
