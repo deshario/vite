@@ -28,7 +28,7 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
       - name: Installing Packages
-        run: yarn
+        run: yarn install --frozen-lockfile
 
       - name: Linting
         run: yarn lint
