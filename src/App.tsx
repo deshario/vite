@@ -1,10 +1,20 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [time, setTime] = useState('00:00:00')
+
+  const getCurrentTime = () => {
+    const now = new Date();
+    return now.toLocaleTimeString('en-US', { hour12: false }).replace(/:/g, ' : ');
+  }
+
+  useEffect(() => {
+    setInterval(() => setTime(getCurrentTime()), 1000)
+  }, [])
 
   return (
     <>
@@ -16,18 +26,10 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>{time}</h1>
+      <button onClick={() => setCount((count) => count + 1)}>
+        count is {count}
+      </button>
     </>
   )
 }
