@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  lint:
     name: Setup + Lint
     runs-on: ubuntu-latest
     strategy:
