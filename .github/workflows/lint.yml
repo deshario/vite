@@ -21,7 +21,13 @@ jobs:
         with:
           node-version: ${{ matrix.node_version }}
 
-      - name: Install Packages
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: -/.cache/yarn
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Installing Packages
         run: yarn
 
       - name: Linting
